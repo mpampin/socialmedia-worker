@@ -1,6 +1,6 @@
 package io.redbee.socialmedia.providers;
 
-import io.redbee.socialmedia.entities.Tweet;
+import io.redbee.socialmedia.entities.Post;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +20,8 @@ public class TwitterProviderTest {
     @Test
     public void getSingleTweet() {
 
-        Tweet tweet = twitterProvider.getATweet();
-        Assert.assertNotNull(tweet);
+        Post post = twitterProvider.getATweet();
+        Assert.assertNotNull(post);
 
     }
 
@@ -29,8 +29,8 @@ public class TwitterProviderTest {
     public void getTweetsForAHashtag() {
 
         String hashtag = "#StarWars";
-        List<Tweet> tweets = twitterProvider.getTweets(hashtag);
-        Assert.assertTrue(tweets.size() > 0);
+        List<Post> posts = twitterProvider.getTweets(hashtag);
+        Assert.assertTrue(posts.size() > 0);
 
     }
 

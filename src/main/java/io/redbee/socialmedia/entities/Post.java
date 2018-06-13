@@ -2,11 +2,12 @@ package io.redbee.socialmedia.entities;
 
 import java.util.Set;
 
-public class Tweet {
+public class Post {
 
     private String user;
     private String message;
     private Set<String> hashtags;
+    private EmbedInfo embedInfo;
 
     public String getUser() {
         return user;
@@ -32,4 +33,11 @@ public class Tweet {
         this.hashtags = hashtags;
     }
 
+    public EmbedInfo getEmbedInfo() {
+        return embedInfo;
+    }
+
+    public void setEmbedInfo(EmbedInfo embedInfo) {
+        this.embedInfo = embedInfo;
+    }
 }

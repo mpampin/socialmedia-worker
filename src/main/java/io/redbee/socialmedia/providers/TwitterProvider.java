@@ -1,8 +1,8 @@
 package io.redbee.socialmedia.providers;
 
-import io.redbee.socialmedia.entities.Tweet;
+import io.redbee.socialmedia.entities.Post;
 import io.redbee.socialmedia.exceptions.TweetNotFoundException;
-import io.redbee.socialmedia.factories.TweetFactory;
+import io.redbee.socialmedia.factories.PostFactory;
 import org.springframework.stereotype.Component;
 import twitter4j.*;
 
@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 @Component
 public class TwitterProvider {
 
-    public Tweet getATweet() {
+    public Post getATweet() {
 
         return getTweets("#askNASA").get(0);
 
     }
 
-    public List<Tweet> getTweets(String interest) {
+    public List<Post> getTweets(String interest) {
 
         Twitter twitter = TwitterFactory.getSingleton();
         Query query = new Query(interest);
@@ -27,18 +27,18 @@ public class TwitterProvider {
         try {
             result = twitter.search(query);
         } catch (TwitterException e) {
-            throw new TweetNotFoundException();
+            throw new TweetNotFoundException(e);
         }
 
         return this.parseTweets(result.getTweets());
 
     }
 
-    private List<Tweet> parseTweets(List<Status> tweets) {
+    private List<Post> parseTweets(List<Status> tweets) {
 
         return tweets.stream()
                 .map(status -> {
-                    return new TweetFactory()
+                    return new PostFactory()
                             .withUser(status.getUser())
                             .withMessage(status.getText())
                             .withHashtags(status.getHashtagEntities())
