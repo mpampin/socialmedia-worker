@@ -21,6 +21,6 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getPostsForInterest(String interest) {
 
-        return twitterProvider.getTweets(interest);
+        return twitterProvider.query(interest, null);
     }
 }

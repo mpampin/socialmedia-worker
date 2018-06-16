@@ -1,10 +1,12 @@
 package io.redbee.socialmedia.services;
 
-import org.springframework.stereotype.Component;
+import io.redbee.socialmedia.entities.Interest;
+import io.redbee.socialmedia.entities.Post;
 
-@Component
-public class InterestService {
+import java.util.List;
 
+public interface InterestService {
 
-
+    List<Post> queryInterestPosts(Interest interest);
+    Interest queryInterest(String interest);
 }

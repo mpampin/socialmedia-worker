@@ -8,6 +8,7 @@ public class Post {
     private String message;
     private Set<String> hashtags;
     private EmbedInfo embedInfo;
+    private Long id;
 
     public String getUser() {
         return user;
@@ -39,5 +40,13 @@ public class Post {
 
     public void setEmbedInfo(EmbedInfo embedInfo) {
         this.embedInfo = embedInfo;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

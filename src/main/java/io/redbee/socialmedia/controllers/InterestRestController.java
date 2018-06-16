@@ -1,6 +1,6 @@
 package io.redbee.socialmedia.controllers;
 
-import io.redbee.socialmedia.services.InterestService;
+import io.redbee.socialmedia.services.impl.InterestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/interests")
 public class InterestRestController {
 
-    private InterestService interestService;
+    private InterestServiceImpl interestService;
 
     @Autowired
-    public InterestRestController(InterestService interestService) {
+    public InterestRestController(InterestServiceImpl interestService) {
         this.interestService = interestService;
     }
 

@@ -39,4 +39,9 @@ public class PostFactory {
     public Post build() {
         return post;
     }
+
+    public PostFactory withId(long id) {
+        post.setId(id);
+        return this;
+    }
 }
