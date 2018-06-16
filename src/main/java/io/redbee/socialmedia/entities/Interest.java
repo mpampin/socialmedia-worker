@@ -6,21 +6,21 @@ import java.util.List;
 
 public class Interest {
 
-    private String interest;
+    private String query;
     private Date lastTimeQueried;
     private List<Post> posts;
 
-    public Interest(String interest) {
-        this.interest = interest;
+    public Interest(String query) {
+        this.query = query;
         this.posts = new ArrayList<>();
     }
 
-    public String getInterest() {
-        return interest;
+    public String getQuery() {
+        return query;
     }
 
-    public void setInterest(String interest) {
-        this.interest = interest;
+    public void setQuery(String query) {
+        this.query = query;
     }
 
     public Date getLastTimeQueried() {
@@ -46,6 +46,10 @@ public class Interest {
 
     public void addPosts(List<Post> posts) {
         this.posts.addAll(0, posts);
+    }
+
+    public void addPost(Post post) {
+        this.posts.add(post);
     }
 }
 

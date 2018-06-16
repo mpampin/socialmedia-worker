@@ -3,6 +3,7 @@ package io.redbee.socialmedia.services.impl;
 import io.redbee.socialmedia.entities.Interest;
 import io.redbee.socialmedia.entities.Post;
 import io.redbee.socialmedia.providers.Provider;
+import io.redbee.socialmedia.repositories.InterestRepository;
 import io.redbee.socialmedia.services.InterestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,11 +19,13 @@ public class InterestServiceImpl implements InterestService {
     @Qualifier("twitterProvider")
     private Provider provider;
 
+    @Autowired
+    private InterestRepository repository;
 
     @Override
     public List<Post> queryInterestPosts(Interest interest) {
 
-        List<Post> posts = provider.query(interest.getInterest(), interest.getLastIdQueried());
+        List<Post> posts = provider.query(interest.getQuery(), interest.getLastIdQueried());
 
         interest.setLastTimeQueried(new Date());
 
@@ -34,13 +37,15 @@ public class InterestServiceImpl implements InterestService {
     }
 
     @Override
-    public Interest queryInterest(String interest) {
+    public Interest queryInterest(String query) {
 
-        // TODO: find interest in database
-        Interest qInterest = new Interest(interest);
-        queryInterestPosts(qInterest);
+        Interest interest = repository.findInterestByQuery(query);
+        if(interest == null) interest = new Interest(query);
+        queryInterestPosts(interest);
 
-        return qInterest;
+        repository.save(interest);
+
+        return interest;
     }
 
 

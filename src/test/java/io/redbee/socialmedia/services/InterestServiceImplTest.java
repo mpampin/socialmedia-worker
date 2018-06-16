@@ -3,6 +3,7 @@ package io.redbee.socialmedia.services;
 import io.redbee.socialmedia.entities.Interest;
 import io.redbee.socialmedia.entities.Post;
 import io.redbee.socialmedia.providers.Provider;
+import io.redbee.socialmedia.repositories.InterestRepository;
 import io.redbee.socialmedia.services.impl.InterestServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,9 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import static org.mockito.Mockito.when;
 
@@ -25,6 +24,9 @@ public class InterestServiceImplTest {
 
     @Mock
     private Provider provider;
+
+    @Mock
+    private InterestRepository repository;
 
     @InjectMocks
     private InterestServiceImpl interestService;
@@ -44,16 +46,42 @@ public class InterestServiceImplTest {
     @Test
     public void queryNewInterestTest() {
 
+        when(repository.findInterestByQuery("#StarWars"))
+                .thenReturn(null);
+
         Interest interest = interestService.queryInterest("#StarWars");
 
         Assert.assertNotNull(interest);
-        Assert.assertEquals("#StarWars", interest.getInterest());
+        Assert.assertEquals("#StarWars", interest.getQuery());
         Assert.assertEquals(Long.valueOf(2), interest.getLastIdQueried());
         Assert.assertNotNull(interest.getLastTimeQueried());
         Assert.assertNotNull(interest.getPosts());
         Assert.assertEquals(2, interest.getPosts().size());
 
     }
+
+    @Test
+    public void queryExistingInterestTest() {
+
+        Interest existingInterest = new Interest("#StarWars");
+        existingInterest.setLastTimeQueried(new Date());
+        existingInterest.addPost(this.createBasicPost(0L));
+        existingInterest.addPost(this.createBasicPost(-1L));
+
+        when(repository.findInterestByQuery("#StarWars"))
+                .thenReturn(existingInterest);
+
+        Interest interest = interestService.queryInterest("#StarWars");
+
+        Assert.assertNotNull(interest);
+        Assert.assertEquals("#StarWars", interest.getQuery());
+        Assert.assertEquals(Long.valueOf(2), interest.getLastIdQueried());
+        Assert.assertNotNull(interest.getLastTimeQueried());
+        Assert.assertNotNull(interest.getPosts());
+        Assert.assertEquals(4, interest.getPosts().size());
+
+    }
+
 
     private Post createBasicPost(Long id) {
         Post post = new Post();
