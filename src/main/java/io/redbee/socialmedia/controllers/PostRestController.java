@@ -1,7 +1,8 @@
 package io.redbee.socialmedia.controllers;
 
+import io.redbee.socialmedia.entities.Interest;
 import io.redbee.socialmedia.entities.Post;
-import io.redbee.socialmedia.services.PostService;
+import io.redbee.socialmedia.services.InterestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,16 +14,17 @@ import java.util.List;
 @RequestMapping("/posts")
 public class PostRestController {
 
-    private PostService postService;
+    private InterestService interestService;
 
     @Autowired
-    public PostRestController(PostService postService) {
-        this.postService = postService;
+    public PostRestController(InterestService interestService) {
+        this.interestService = interestService;
     }
 
     @RequestMapping
     public List<Post> getPosts(@RequestParam("interest") String interest) {
-        return this.postService.getPostsForInterest(interest);
+        Interest qInterest = this.interestService.queryInterest(interest);
+        return qInterest.getPosts();
     }
 
 }

@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Interest {
 
-
     private String interest;
     private Date lastTimeQueried;
     private List<Post> posts;
