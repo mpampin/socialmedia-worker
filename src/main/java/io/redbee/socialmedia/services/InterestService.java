@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface InterestService {
 
-    List<Post> queryInterestPosts(Interest interest);
+    List<Post> queryInterestUpdates(Interest interest);
     Interest queryInterest(String interest);
 }

@@ -23,9 +23,9 @@ public class InterestServiceImpl implements InterestService {
     private InterestRepository repository;
 
     @Override
-    public List<Post> queryInterestPosts(Interest interest) {
+    public List<Post> queryInterestUpdates(Interest interest) {
 
-        List<Post> posts = provider.query(interest.getQuery(), interest.getLastIdQueried());
+        List<Post> posts = provider.queryUpdates(interest);
 
         interest.setLastTimeQueried(new Date());
 
@@ -41,7 +41,7 @@ public class InterestServiceImpl implements InterestService {
 
         Interest interest = repository.findInterestByQuery(query);
         if(interest == null) interest = new Interest(query);
-        queryInterestPosts(interest);
+        queryInterestUpdates(interest);
 
         repository.save(interest);
 

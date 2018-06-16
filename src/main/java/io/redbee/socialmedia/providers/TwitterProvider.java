@@ -1,5 +1,6 @@
 package io.redbee.socialmedia.providers;
 
+import io.redbee.socialmedia.entities.Interest;
 import io.redbee.socialmedia.entities.Post;
 import io.redbee.socialmedia.exceptions.TweetNotFoundException;
 import io.redbee.socialmedia.factories.PostFactory;
@@ -37,8 +38,8 @@ public class TwitterProvider implements Provider {
 
 
     @Override
-    public List<Post> query(String interest, Long lastId) {
-        return this.getTweets(interest, lastId);
+    public List<Post> queryUpdates(Interest interest) {
+        return this.getTweets(interest.getQuery(), interest.getLastIdQueried());
     }
 
     private List<Post> getTweets(String interest, Long lastId) {

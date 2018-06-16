@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -31,7 +29,7 @@ public class TwitterProviderTest {
     public void getTweetsForAHashtag() {
 
         String hashtag = "#StarWars";
-        List<Post> posts = twitterProvider.query(hashtag, null);
+        List<Post> posts = twitterProvider.queryUpdates(hashtag, null);
         Assert.assertTrue(posts.size() > 0);
 
     }
@@ -40,7 +38,7 @@ public class TwitterProviderTest {
     public void getTweetsSinceId999() {
 
         String hashtag = "#StarWars";
-        List<Post> posts = twitterProvider.query(hashtag, 1007811761993666561l);
+        List<Post> posts = twitterProvider.queryUpdates(hashtag, 1007811761993666561l);
         Assert.assertTrue(posts.size() > 0);
 
     }

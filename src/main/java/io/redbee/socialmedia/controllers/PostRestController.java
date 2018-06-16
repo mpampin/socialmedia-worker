@@ -22,9 +22,9 @@ public class PostRestController {
     }
 
     @RequestMapping
-    public List<Post> getPosts(@RequestParam("interest") String interest) {
-        Interest qInterest = this.interestService.queryInterest(interest);
-        return qInterest.getPosts();
+    public List<Post> getPosts(@RequestParam("interest") String query) {
+        Interest interest = this.interestService.queryInterest(query);
+        return interest.getPosts();
     }
 
 }

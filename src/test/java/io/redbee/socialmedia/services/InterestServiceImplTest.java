@@ -35,10 +35,10 @@ public class InterestServiceImplTest {
     public void setUp() {
 
         List<Post> posts = new ArrayList<>();
-        posts.add(createBasicPost(2l));
-        posts.add(createBasicPost(1l));
+        posts.add(createBasicPost(4l));
+        posts.add(createBasicPost(3l));
 
-        when(provider.query("#StarWars", 0L))
+        when(provider.queryUpdates("#StarWars", 0L))
                 .thenReturn(posts);
 
     }
@@ -53,7 +53,7 @@ public class InterestServiceImplTest {
 
         Assert.assertNotNull(interest);
         Assert.assertEquals("#StarWars", interest.getQuery());
-        Assert.assertEquals(Long.valueOf(2), interest.getLastIdQueried());
+        Assert.assertEquals(Long.valueOf(4), interest.getLastIdQueried());
         Assert.assertNotNull(interest.getLastTimeQueried());
         Assert.assertNotNull(interest.getPosts());
         Assert.assertEquals(2, interest.getPosts().size());
@@ -75,7 +75,7 @@ public class InterestServiceImplTest {
 
         Assert.assertNotNull(interest);
         Assert.assertEquals("#StarWars", interest.getQuery());
-        Assert.assertEquals(Long.valueOf(2), interest.getLastIdQueried());
+        Assert.assertEquals(Long.valueOf(4), interest.getLastIdQueried());
         Assert.assertNotNull(interest.getLastTimeQueried());
         Assert.assertNotNull(interest.getPosts());
         Assert.assertEquals(4, interest.getPosts().size());
