@@ -1,5 +1,6 @@
 package io.redbee.socialmedia.providers;
 
+import io.redbee.socialmedia.entities.Interest;
 import io.redbee.socialmedia.entities.Post;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,17 +29,8 @@ public class TwitterProviderTest {
     @Test
     public void getTweetsForAHashtag() {
 
-        String hashtag = "#StarWars";
-        List<Post> posts = twitterProvider.queryUpdates(hashtag, null);
-        Assert.assertTrue(posts.size() > 0);
-
-    }
-
-    @Test
-    public void getTweetsSinceId999() {
-
-        String hashtag = "#StarWars";
-        List<Post> posts = twitterProvider.queryUpdates(hashtag, 1007811761993666561l);
+        Interest interest = new Interest("#StarWars");
+        List<Post> posts = twitterProvider.queryUpdates(interest);
         Assert.assertTrue(posts.size() > 0);
 
     }

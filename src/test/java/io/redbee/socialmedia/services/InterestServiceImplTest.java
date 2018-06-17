@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.*;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,7 +39,7 @@ public class InterestServiceImplTest {
         posts.add(createBasicPost(4l));
         posts.add(createBasicPost(3l));
 
-        when(provider.queryUpdates("#StarWars", 0L))
+        when(provider.queryUpdates(any(Interest.class)))
                 .thenReturn(posts);
 
     }
