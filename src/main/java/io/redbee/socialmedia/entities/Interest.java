@@ -1,11 +1,15 @@
 package io.redbee.socialmedia.entities;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Interest {
 
+    @Id
+    private String id;
     private String query;
     private Date lastTimeQueried;
     private List<Post> posts;
