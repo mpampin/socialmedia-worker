@@ -66,8 +66,8 @@ public class InterestServiceImplTest {
 
         Interest existingInterest = new Interest("#StarWars");
         existingInterest.setLastTimeQueried(new Date());
-        existingInterest.addPost(this.createBasicPost(0L));
-        existingInterest.addPost(this.createBasicPost(-1L));
+        existingInterest.addPost(this.createBasicPost(2L));
+        existingInterest.addPost(this.createBasicPost(1L));
 
         when(repository.findInterestByQuery("#StarWars"))
                 .thenReturn(existingInterest);
@@ -76,10 +76,10 @@ public class InterestServiceImplTest {
 
         Assert.assertNotNull(interest);
         Assert.assertEquals("#StarWars", interest.getQuery());
-        Assert.assertEquals(Long.valueOf(4), interest.getLastIdQueried());
+        Assert.assertEquals(Long.valueOf(2), interest.getLastIdQueried());
         Assert.assertNotNull(interest.getLastTimeQueried());
         Assert.assertNotNull(interest.getPosts());
-        Assert.assertEquals(4, interest.getPosts().size());
+        Assert.assertEquals(2, interest.getPosts().size());
 
     }
 
