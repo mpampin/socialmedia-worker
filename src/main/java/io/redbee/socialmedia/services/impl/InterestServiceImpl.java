@@ -68,7 +68,7 @@ public class InterestServiceImpl implements InterestService {
         List<Post> posts = this.updateInterestPosts(interest);
         repository.save(interest);
 
-        postPublishService.publish(posts);
+        postPublishService.publish(posts, interest.getQuery());
 
         return CompletableFuture.completedFuture(posts);
 
