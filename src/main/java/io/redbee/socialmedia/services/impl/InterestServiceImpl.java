@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -22,13 +23,13 @@ public class InterestServiceImpl implements InterestService {
 
     private static final Logger log = LoggerFactory.getLogger(InterestServiceImpl.class);
 
-    private final Provider provider;
+    private final List<Provider> providers;
     private final InterestRepository repository;
     private final PostPublishService postPublishService;
 
     @Autowired
-    public InterestServiceImpl(@Qualifier("twitterProvider") Provider provider, InterestRepository repository, PostPublishService postPublishService) {
-        this.provider = provider;
+    public InterestServiceImpl(List<Provider> providers, InterestRepository repository, PostPublishService postPublishService) {
+        this.providers = providers;
         this.repository = repository;
         this.postPublishService = postPublishService;
     }
@@ -36,7 +37,11 @@ public class InterestServiceImpl implements InterestService {
     @Override
     public List<Post> updateInterestPosts(Interest interest) {
 
-        List<Post> posts = provider.queryUpdates(interest);
+        List<Post> posts = new ArrayList<>();
+        for(Provider provider : providers) {
+            List<Post> providerPosts = provider.queryUpdates(interest);
+            posts.addAll(providerPosts);
+        }
 
         interest.setLastTimeQueried(new Date());
 
