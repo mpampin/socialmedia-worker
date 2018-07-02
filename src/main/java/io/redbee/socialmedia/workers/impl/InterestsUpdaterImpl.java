@@ -32,7 +32,7 @@ public class InterestsUpdaterImpl implements InterestsUpdater {
     }
 
     @Override
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(cron = "${io.redbee.socialmedia.worker.cron}")
     public void updateAllInterests() throws ExecutionException, InterruptedException {
 
         log.info("Updating all interests...");

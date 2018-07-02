@@ -38,6 +38,7 @@ public class InterestServiceImpl implements InterestService {
     public List<Post> updateInterestPosts(Interest interest) {
 
         List<Post> posts = new ArrayList<>();
+        // TODO: Agregar threadpool para hacer querys en paralelo
         for(Provider provider : providers) {
             List<Post> providerPosts = provider.queryUpdates(interest);
             posts.addAll(providerPosts);
